@@ -21,10 +21,6 @@ variable "cidr_block_vpc" {
   default = "192.168.0.0/16"
 }
 
-variable "cidr_block_public_subnet" {
-    type = string
-    default = "192.168.34.0/24"
-}
 
 resource "aws_vpc" "tf-vpc" {
 
