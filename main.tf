@@ -11,9 +11,9 @@ terraform {
 
 provider "aws" {
   region  = "eu-west-2"
-  shared_config_files = [ "<Insert AWS Config Path>" ]
-  shared_credentials_files = [ "<Insert AWS Credentials Path>" ]
-  profile = "<Insert Your Profile Name>"
+  shared_config_files = [ "~/.aws/config" ]
+  shared_credentials_files = [ "~/.aws/credentials" ]
+  profile = "ahmed"
 }
 
 variable "cidr_block_vpc" {
@@ -26,47 +26,47 @@ variable "cidr_block_public_subnet" {
     default = "192.168.34.0/24"
 }
 
-resource "aws_vpc" "tf-vpc" {
+# resource "aws_vpc" "tf-vpc" {
 
-    cidr_block = var.cidr_block_vpc
-    instance_tenancy = "default"
+#     cidr_block = var.cidr_block_vpc
+#     instance_tenancy = "default"
 
-    tags = {
-      "name" = "tf-vpc"
-    }
-}
+#     tags = {
+#       "name" = "tf-vpc"
+#     }
+# }
 
-resource "aws_subnet" "tf-vpc-public-subnet" {
+# resource "aws_subnet" "tf-vpc-public-subnet" {
 
-    vpc_id = aws_vpc.tf-vpc.id
-    cidr_block = var.cidr_block_public_subnet
+#     vpc_id = aws_vpc.tf-vpc.id
+#     cidr_block = var.cidr_block_public_subnet
 
-    tags = {
-      "name" = "tf-vpc-public-subnet"
-    }
+#     tags = {
+#       "name" = "tf-vpc-public-subnet"
+#     }
   
-}
+# }
 
-resource "aws_internet_gateway" "tf-vpc-gateway" {
-    vpc_id = aws_vpc.tf-vpc.id
-    tags = {
-      "name" = "tf-vpc-igw"
-    }
-}
+# resource "aws_internet_gateway" "tf-vpc-gateway" {
+#     vpc_id = aws_vpc.tf-vpc.id
+#     tags = {
+#       "name" = "tf-vpc-igw"
+#     }
+# }
 
-resource "aws_route_table" "tf-vpc-rt" {
-    vpc_id = aws_vpc.tf-vpc.id
-    route {
-        cidr_block = "0.0.0.0/0"
-        gateway_id = aws_internet_gateway.tf-vpc-gateway.id
-    }
-}
+# resource "aws_route_table" "tf-vpc-rt" {
+#     vpc_id = aws_vpc.tf-vpc.id
+#     route {
+#         cidr_block = "0.0.0.0/0"
+#         gateway_id = aws_internet_gateway.tf-vpc-gateway.id
+#     }
+# }
 
-resource "aws_route_table_association" "tf-public-subnet-rt-assoc" {
-    subnet_id = aws_subnet.tf-vpc-public-subnet.id
-    route_table_id = aws_route_table.tf-vpc-rt.id
+# resource "aws_route_table_association" "tf-public-subnet-rt-assoc" {
+#     subnet_id = aws_subnet.tf-vpc-public-subnet.id
+#     route_table_id = aws_route_table.tf-vpc-rt.id
   
-}
+# }
 
 data "aws_ami" "ubuntu" {
 
@@ -101,7 +101,7 @@ resource "aws_instance" "frontend-server" {
           device_index         = 0
     }
 
-    key_name = "<Your name>"
+    key_name = "huzaifa"
   
 }
 
