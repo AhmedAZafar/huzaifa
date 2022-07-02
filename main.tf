@@ -11,9 +11,9 @@ terraform {
 
 provider "aws" {
   region  = "eu-west-2"
-  shared_config_files = [ "~/.aws/config" ]
-  shared_credentials_files = [ "~/.aws/credentials" ]
-  profile = "ahmed"
+  # shared_config_files = [ "<Insert AWS Config Path>" ]
+  # shared_credentials_files = [ "<Insert AWS Credentials Path>" ]
+  profile = "default"
 }
 
 variable "cidr_block_vpc" {
